@@ -94,34 +94,78 @@ payment1.completePayment();
 console.log(user1);
 console.log(payment1);
 
+# Part-2 Business-Logic(business_logic.js)
+# Inventory Management System
 
-# Class Diagram
+This project is an inventory management system designed to track stock levels and handle restocking of products in a warehouse. It processes sales orders, reduces stock levels accordingly, and triggers restock alerts when stock falls below a threshold.
 
-Below is the class diagram representing the relationships between `User`, `Product`, `Order`, and `Payment` in the simplified e-commerce system.
+## Features
 
-```plaintext
-+-------------------+      +-----------------+
-|       User        |      |     Product     |
-+-------------------+      +-----------------+
-| - userId          |      | - productId     |
-| - name            |      | - name          |
-| - email           |      | - price         |
-+-------------------+      +-----------------+
-        |                         |
-        | 1                   *   |      
-        +-------------------------+      
-               makes              
+- **Track Product Stock**: Keeps track of the available stock for each product.
+- **Process Orders**: Processes incoming sales orders, reduces stock levels, and triggers alerts for products that fall below the threshold.
+- **Restocking**: Allows for restocking items when necessary, updating stock levels.
 
-+------------------+      +----------------+
-|      Order       |      |    Payment     |
-+------------------+      +----------------+
-| - orderId        |      | - paymentId    |
-| - status         |      | - amount       |
-| - date           |      | - status       |
-+------------------+      +----------------+
-| 1      * |                 |  1
-|          +-----------------+
-|         contains             |
-+------------------------------+
+## Business Logic
+
+### Classes
+
+- **Product**
+  - Properties:
+    - `productId`: Unique identifier for the product.
+    - `name`: Name of the product.
+    - `stock`: Current stock level of the product.
+    - `threshold`: The minimum stock level before an alert is triggered (default is 10).
+  - Methods:
+    - `toString()`: Returns a string representation of the product.
+
+### Functions
+
+- **`processOrders(products, orders)`**:
+  - Takes a dictionary of products and a list of incoming sales orders.
+  - Reduces stock levels for the products ordered.
+  - Triggers an alert if any product's stock falls below the threshold.
+  - Handles errors when there is insufficient stock for a product.
+  
+  **Parameters**:
+  - `products`: Dictionary of `Product` objects (e.g., `{productId: Product}`).
+  - `orders`: List of sales orders in the form of `[productId, quantity]`.
+
+- **`restockItems(products, restockList)`**:
+  - Takes a dictionary of products and a list of restock requests.
+  - Updates the stock levels based on the required restocking quantities.
+  
+  **Parameters**:
+  - `products`: Dictionary of `Product` objects.
+  - `restockList`: List of restocking requests in the form of `[productId, quantity]`.
+
+## Example Usage
+
+```javascript
+// Initialize products
+const products = {
+  101: new Product(101, 'Laptop', 15),
+  102: new Product(102, 'Mouse', 5),
+  103: new Product(103, 'Keyboard', 20),
+};
+
+// Incoming sales orders: [productId, quantity]
+const orders = [
+  [101, 5], // 5 Laptops
+  [102, 3], // 3 Mice
+  [103, 25], // 25 Keyboards (exceeds available stock)
+];
+
+// Process orders
+processOrders(products, orders);
+
+// Restock items: [productId, quantity]
+const restockList = [
+  [102, 10], // Restock 10 Mice
+  [103, 30], // Restock 30 Keyboards
+];
+
+// Restock products
+restockItems(products, restockList);
+
 
 
