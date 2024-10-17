@@ -4,6 +4,36 @@
 
 This project is a simplified e-commerce system that handles basic operations like user management, product catalog, order management, and payment processing. It is written in JavaScript using basic class structures to simulate a backend service.
 
+# Class Diagram
+
+Below is the class diagram representing the relationships between `User`, `Product`, `Order`, and `Payment` in the simplified e-commerce system.
+
+```plaintext
++-------------------+      +-----------------+
+|       User        |      |     Product     |
++-------------------+      +-----------------+
+| - userId          |      | - productId     |
+| - name            |      | - name          |
+| - email           |      | - price         |
++-------------------+      +-----------------+
+        |                         |
+        | 1                   *   |      
+        +-------------------------+      
+               makes              
+
++------------------+      +----------------+
+|      Order       |      |    Payment     |
++------------------+      +----------------+
+| - orderId        |      | - paymentId    |
+| - status         |      | - amount       |
+| - date           |      | - status       |
++------------------+      +----------------+
+| 1      * |                 |  1
+|          +-----------------+
+|         contains             |
++------------------------------+
+
+
 ## Features
 
 - **Users**: Can create and manage orders.
