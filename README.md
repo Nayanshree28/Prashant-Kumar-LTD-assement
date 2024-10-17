@@ -66,34 +66,6 @@ The system is designed around four main classes:
 - **Methods**:
   - `completePayment()`: Marks the payment as completed.
 
-## Example Usage
-
-The system simulates the interaction between users, orders, and payments. Here’s how you can use the system:
-
-```javascript
-// Create users
-const user1 = new User(1, 'Alice', 'alice@example.com');
-const user2 = new User(2, 'Bob', 'bob@example.com');
-
-// Create products
-const product1 = new Product(101, 'Laptop', 1200);
-const product2 = new Product(102, 'Mouse', 25);
-
-// Create orders
-const order1 = new Order(201, user1.userId);
-order1.addProduct(product1);
-order1.addProduct(product2);
-
-// Add order to user1
-user1.addOrder(order1);
-
-// Create a payment for the order
-const payment1 = new Payment(301, order1.orderId, order1.getTotalAmount());
-payment1.completePayment();
-
-console.log(user1);
-console.log(payment1);
-javascript```
 
 # Part-2 Business-Logic(business_logic.js)
 # Inventory Management System
@@ -139,34 +111,6 @@ This project is an inventory management system designed to track stock levels an
   - `products`: Dictionary of `Product` objects.
   - `restockList`: List of restocking requests in the form of `[productId, quantity]`.
 
-## Example Usage
-
-```javascript
-// Initialize products
-const products = {
-  101: new Product(101, 'Laptop', 15),
-  102: new Product(102, 'Mouse', 5),
-  103: new Product(103, 'Keyboard', 20),
-};
-
-// Incoming sales orders: [productId, quantity]
-const orders = [
-  [101, 5], // 5 Laptops
-  [102, 3], // 3 Mice
-  [103, 25], // 25 Keyboards (exceeds available stock)
-];
-
-// Process orders
-processOrders(products, orders);
-
-// Restock items: [productId, quantity]
-const restockList = [
-  [102, 10], // Restock 10 Mice
-  [103, 30], // Restock 30 Keyboards
-];
-
-// Restock products
-restockItems(products, restockList);
 
 
 
