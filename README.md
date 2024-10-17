@@ -93,6 +93,7 @@ payment1.completePayment();
 
 console.log(user1);
 console.log(payment1);
+javascript```
 
 # Part-2 Business-Logic(business_logic.js)
 # Inventory Management System
